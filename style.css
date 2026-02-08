@@ -24,6 +24,24 @@
   text-decoration: none;
   text-align: center;
   display: inline-block;
-  
+  font-size: 16px;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
 
+.btn:hover {
+  background-color: #3e8e43;
+}
+
+.control {
+  text-align: center;
+}
+
+canvas {
+  background: #000;
 }
