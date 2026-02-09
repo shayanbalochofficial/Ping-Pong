@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shayan - Ping Pong Game</title>
 
-    <!-- Bootstrap Css File -->
+    <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
 
-    <!-- My CSs  File -->
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css" />
 
     <style>
       canvas {
         border: 1px solid black;
+        background: #000;
       }
     </style>
   </head>
@@ -24,21 +25,24 @@
     <div class="container">
       <canvas id="canvas" width="600" height="400"></canvas>
     </div>
+
     <div class="button">
       <button id="start-btn" class="btn">Start</button>
       <button id="pause-btn" class="btn">Pause</button>
-      <button id="restart-btn" class="btn">Restrat</button>
+      <button id="restart-btn" class="btn">Restart</button>
     </div>
+
     <p class="control">
       Left Player should use W/S ||| Right user use Arrow keys
     </p>
-    <div class="modal" tabindex="-1" role="dialog" id="message-modal">
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="message-modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-body">
             <h5 id="message"></h5>
           </div>
-          <div class="footer">
+          <div class="modal-footer">
             <button
               type="button"
               id="msg-modal-close"
@@ -52,6 +56,9 @@
       </div>
     </div>
 
-    <script src="sçript.js"></script>
+    <!-- Scripts (jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

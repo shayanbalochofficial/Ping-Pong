@@ -1,6 +1,17 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #e2d8d8;
+  color: rgb(0, 0, 0);
 }
 
 .container {
@@ -11,8 +22,8 @@
 }
 
 .button {
-  display: "flex";
-  justify-content: "center";
+  display: flex;
+  justify-content: center;
   margin-top: 15px;
 }
 
@@ -28,10 +39,6 @@
   margin: 10px;
   cursor: pointer;
   border-radius: 5px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
 }
 
 .btn:hover {
@@ -40,8 +47,6 @@
 
 .control {
   text-align: center;
-}
-
-canvas {
-  background: #000;
+  margin-top: 10px;
+  font-size: 18px;
 }

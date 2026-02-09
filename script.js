@@ -1,4 +1,5 @@
 // ke ye aankhein hai nam, tu jaane na oh beparwah
+
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
@@ -7,19 +8,18 @@ var pauseBtn = document.getElementById("pause-btn");
 var restartBtn = document.getElementById("restart-btn");
 
 var animationId;
-
 var gameRunning = false;
 
 startBtn.addEventListener("click", function () {
   if (!gameRunning) {
     gameRunning = true;
-    //!   Loop Function will run, not made yet
+    loop();
   }
 });
 
 pauseBtn.addEventListener("click", function () {
   gameRunning = false;
-  //! Game Pause Func here
+  cancelAnimationFrame(animationId);
 });
 
 restartBtn.addEventListener("click", function () {
@@ -58,7 +58,7 @@ let wPressed = false;
 let sPressed = false;
 
 document.addEventListener("keydown", keyDownHandler);
-document.addEventListener("keyup", KeyUpHandler);
+document.addEventListener("keyup", keyUpHandler);
 
 function keyDownHandler(e) {
   if (e.key === "ArrowUp") {
@@ -72,7 +72,7 @@ function keyDownHandler(e) {
   }
 }
 
-function KeyUpHandler(e) {
+function keyUpHandler(e) {
   if (e.key === "ArrowUp") {
     upPressed = false;
   } else if (e.key === "ArrowDown") {
@@ -93,6 +93,8 @@ function update() {
 
   if (wPressed && leftPaddleY > 0) {
     leftPaddleY -= paddleSpeed;
+  } else if (sPressed && leftPaddleY + paddleHeight < canvas.height) {
+    leftPaddleY += paddleSpeed;
   }
 
   ballX += ballSpeedX;
@@ -105,7 +107,15 @@ function update() {
   if (
     ballX - ballRadius < paddleWidth &&
     ballY > leftPaddleY &&
-    ballY < leftPaddleY + PaddleHeight
+    ballY < leftPaddleY + paddleHeight
+  ) {
+    ballSpeedX = -ballSpeedX;
+  }
+
+  if (
+    ballX + ballRadius > canvas.width - paddleWidth &&
+    ballY > rightPaddleY &&
+    ballY < rightPaddleY + paddleHeight
   ) {
     ballSpeedX = -ballSpeedX;
   }
@@ -113,10 +123,10 @@ function update() {
   // Checking if ball goes out of boundaries on sides of the canvas
   if (ballX < 0) {
     rightPlayerScore++;
-    //! reset function
+    reset();
   } else if (ballX > canvas.width) {
     leftPlayerScore++;
-    //! reset function
+    reset();
   }
 
   if (leftPlayerScore === maxScore) {
@@ -126,7 +136,7 @@ function update() {
   }
 }
 
-function PlayerWin() {
+function playerWin(player) {
   var message = "Congratulations! " + player + " win!";
   $("#message").text(message);
   $("#message-modal").modal("show");
@@ -134,5 +144,49 @@ function PlayerWin() {
 }
 
 function reset() {
-  ballX = canvas.
+  ballX = canvas.width / 2;
+  ballY = canvas.height / 2;
+  ballSpeedX = -ballSpeedX;
+  ballSpeedY = Math.random() * 10 - 5;
 }
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#FFF";
+  ctx.font = "15px Arial";
+  ctx.beginPath();
+  ctx.moveTo(canvas.width / 2, 0);
+  ctx.lineTo(canvas.width / 2, canvas.height);
+  ctx.strokeStyle = "#FFF";
+  ctx.stroke();
+  ctx.closePath();
+
+  ctx.beginPath();
+  ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.closePath();
+
+  ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
+  ctx.fillRect(
+    canvas.width - paddleWidth,
+    rightPaddleY,
+    paddleWidth,
+    paddleHeight,
+  );
+
+  ctx.fillText("Score: " + leftPlayerScore, 10, 20);
+  ctx.fillText("Score: " + rightPlayerScore, canvas.width - 70, 20);
+}
+
+function loop() {
+  if (gameRunning) {
+    update();
+    draw();
+    animationId = requestAnimationFrame(loop);
+  }
+}
+
+$("#msg-modal-close").on("click", function () {
+  document.location.reload();
+});
