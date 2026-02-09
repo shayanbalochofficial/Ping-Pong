@@ -58,7 +58,7 @@ let wPressed = false;
 let sPressed = false;
 
 document.addEventListener("keydown", keyDownHandler);
-document.addEventListener( );
+document.addEventListener("keyup", KeyUpHandler);
 
 function keyDownHandler(e) {
   if (e.key === "ArrowUp") {
@@ -72,4 +72,33 @@ function keyDownHandler(e) {
   }
 }
 
-function KeyUpHandler() {}
+function KeyUpHandler(e) {
+  if (e.key === "ArrowUp") {
+    upPressed = false;
+  } else if (e.key === "ArrowDown") {
+    downPressed = false;
+  } else if (e.key === "w") {
+    wPressed = false;
+  } else if (e.key === "s") {
+    sPressed = false;
+  }
+}
+
+function update() {
+  if (upPressed && rightPaddleY > 0) {
+    rightPaddleY -= paddleSpeed;
+  } else if (downPressed && rightPaddleY + paddleHeight < canvas.height) {
+    rightPaddleY += paddleSpeed;
+  }
+
+  if (wPressed && leftPaddleY > 0) {
+    leftPaddleY -= paddleSpeed;
+  }
+
+  //!Riiht side code just for testing
+  if (ballY > rightPaddleY + paddleHeight / 2) {
+    rightPaddleY += paddleSpeed;
+  } else if (ballY < rightPaddleY + paddleHeight / 2) {
+    rightPaddleY -= paddleSpeed;
+  }
+}
