@@ -46,3 +46,30 @@ var leftPaddleY = canvas.height / 2 - paddleHeight / 2;
 var rightPaddleY = canvas.height / 2 - paddleHeight / 2;
 
 var paddleSpeed = 10;
+
+// Scores
+var leftPlayerScore = 0;
+var RightPlayerScore = 0;
+var maxScore = 10;
+
+var upPressed = false;
+var downPressed = false;
+let wPressed = false;
+let sPressed = false;
+
+document.addEventListener("keydown", keyDownHandler);
+document.addEventListener( );
+
+function keyDownHandler(e) {
+  if (e.key === "ArrowUp") {
+    upPressed = true;
+  } else if (e.key === "ArrowDown") {
+    downPressed = true;
+  } else if (e.key === "w") {
+    wPressed = true;
+  } else if (e.key === "s") {
+    sPressed = true;
+  }
+}
+
+function KeyUpHandler() {}
