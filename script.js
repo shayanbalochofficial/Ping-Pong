@@ -22,4 +22,27 @@ pauseBtn.addEventListener("click", function () {
   //! Game Pause Func here
 });
 
-restartBtn.addEventListener();
+restartBtn.addEventListener("click", function () {
+  document.location.reload();
+});
+
+addEventListener("load", (event) => {
+  draw();
+});
+
+// 😶
+var ballRadius = 10;
+
+var ballX = canvas.width / 2;
+var ballY = canvas.height / 2;
+
+var ballSpeedX = 5;
+var ballSpeedY = 5;
+
+var paddleHeight = 80;
+var paddleWidth = 10;
+
+var leftPaddleY = canvas.height / 2 - paddleHeight / 2;
+var rightPaddleY = canvas.height / 2 - paddleHeight / 2;
+
+var paddleSpeed = 10;
