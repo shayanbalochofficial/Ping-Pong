@@ -1,4 +1,4 @@
-```markdown
+
 # 🏓 Shayan - Ping Pong Game
 
 A classic two-player Ping Pong (Pong) game built with **HTML**, **CSS**, and **Vanilla JavaScript**.  
@@ -77,4 +77,5 @@ GitHub: https://github.com/shayanbalochofficial/
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
+
 
