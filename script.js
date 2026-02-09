@@ -49,7 +49,7 @@ var paddleSpeed = 10;
 
 // Scores
 var leftPlayerScore = 0;
-var RightPlayerScore = 0;
+var rightPlayerScore = 0;
 var maxScore = 10;
 
 var upPressed = false;
@@ -85,20 +85,47 @@ function KeyUpHandler(e) {
 }
 
 function update() {
-  if (upPressed && rightPaddleY > 0) {
-    rightPaddleY -= paddleSpeed;
-  } else if (downPressed && rightPaddleY + paddleHeight < canvas.height) {
-    rightPaddleY += paddleSpeed;
-  }
+    if (upPressed && rightPaddleY > 0) {
+        rightPaddleY -= paddleSpeed;
+    } else if (downPressed && rightPaddleY + paddleHeight < canvas.height) {
+        rightPaddleY += paddleSpeed;
+    }
 
-  if (wPressed && leftPaddleY > 0) {
-    leftPaddleY -= paddleSpeed;
-  }
+    if (wPressed && leftPaddleY > 0) {
+        leftPaddleY -= paddleSpeed;
+    }
 
-  //!Riiht side code just for testing
-  if (ballY > rightPaddleY + paddleHeight / 2) {
-    rightPaddleY += paddleSpeed;
-  } else if (ballY < rightPaddleY + paddleHeight / 2) {
-    rightPaddleY -= paddleSpeed;
-  }
+    ballX += ballSpeedX;
+    ballY += ballSpeedY;
+
+    if (ballY - ballRadius < 0 || ballY + ballRadius > canvas.height) {
+        ballSpeedY = -ballSpeedY;
+    }
+
+    if (
+        ballX - ballRadius < paddleWidth &&
+        ballY > leftPaddleY &&
+        ballY < leftPaddleY + PaddleHeight
+    ) {
+        ballSpeedX = -ballSpeedX;
+    }
+
+    // Checking if ball goes out of boundaries on sides of the canvas
+    if (ballX < 0) {
+        rightPlayerScore++;
+        //! reset function
+    } else if (ballX > canvas.width) {
+        leftPlayerScore++;
+        //! reset function
+    }
+
+    if (leftPlayerScore === maxScore) {
+        //! Shows winning Player
+    } else if (rightPlayerScore === maxScore) {
+        //! Showing winning player 
+    }
+}
+
+function PlayerWin() {
+    
 }
