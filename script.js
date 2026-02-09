@@ -85,47 +85,54 @@ function KeyUpHandler(e) {
 }
 
 function update() {
-    if (upPressed && rightPaddleY > 0) {
-        rightPaddleY -= paddleSpeed;
-    } else if (downPressed && rightPaddleY + paddleHeight < canvas.height) {
-        rightPaddleY += paddleSpeed;
-    }
+  if (upPressed && rightPaddleY > 0) {
+    rightPaddleY -= paddleSpeed;
+  } else if (downPressed && rightPaddleY + paddleHeight < canvas.height) {
+    rightPaddleY += paddleSpeed;
+  }
 
-    if (wPressed && leftPaddleY > 0) {
-        leftPaddleY -= paddleSpeed;
-    }
+  if (wPressed && leftPaddleY > 0) {
+    leftPaddleY -= paddleSpeed;
+  }
 
-    ballX += ballSpeedX;
-    ballY += ballSpeedY;
+  ballX += ballSpeedX;
+  ballY += ballSpeedY;
 
-    if (ballY - ballRadius < 0 || ballY + ballRadius > canvas.height) {
-        ballSpeedY = -ballSpeedY;
-    }
+  if (ballY - ballRadius < 0 || ballY + ballRadius > canvas.height) {
+    ballSpeedY = -ballSpeedY;
+  }
 
-    if (
-        ballX - ballRadius < paddleWidth &&
-        ballY > leftPaddleY &&
-        ballY < leftPaddleY + PaddleHeight
-    ) {
-        ballSpeedX = -ballSpeedX;
-    }
+  if (
+    ballX - ballRadius < paddleWidth &&
+    ballY > leftPaddleY &&
+    ballY < leftPaddleY + PaddleHeight
+  ) {
+    ballSpeedX = -ballSpeedX;
+  }
 
-    // Checking if ball goes out of boundaries on sides of the canvas
-    if (ballX < 0) {
-        rightPlayerScore++;
-        //! reset function
-    } else if (ballX > canvas.width) {
-        leftPlayerScore++;
-        //! reset function
-    }
+  // Checking if ball goes out of boundaries on sides of the canvas
+  if (ballX < 0) {
+    rightPlayerScore++;
+    //! reset function
+  } else if (ballX > canvas.width) {
+    leftPlayerScore++;
+    //! reset function
+  }
 
-    if (leftPlayerScore === maxScore) {
-        //! Shows winning Player
-    } else if (rightPlayerScore === maxScore) {
-        //! Showing winning player 
-    }
+  if (leftPlayerScore === maxScore) {
+    playerWin("Left player");
+  } else if (rightPlayerScore === maxScore) {
+    playerWin("Right player");
+  }
 }
 
 function PlayerWin() {
-    
+  var message = "Congratulations! " + player + " win!";
+  $("#message").text(message);
+  $("#message-modal").modal("show");
+  reset();
+}
+
+function reset() {
+  ballX = canvas.
 }
